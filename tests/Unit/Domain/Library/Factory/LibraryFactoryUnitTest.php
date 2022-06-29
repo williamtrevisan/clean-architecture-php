@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Domain\Library\Factory\LibraryFactory;
+use Core\Domain\Library\Factory\LibraryFactory;
 
 it('should be able to create a new citizen', function () {
     $payload = ['name' => 'Library name', 'email' => 'email@email.com'];

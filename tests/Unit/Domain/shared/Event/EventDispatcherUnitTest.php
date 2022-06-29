@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Domain\shared\Event\Event;
-use Domain\shared\Event\EventDispatcher;
-use Domain\shared\Event\EventHandlerInterface;
+use Core\Domain\shared\Event\Event;
+use Core\Domain\shared\Event\EventDispatcher;
+use Core\Domain\shared\Event\EventHandlerInterface;
 
 afterEach(function () {
     Mockery::close();
@@ -47,7 +47,7 @@ it('should be able to unregister all event handlers', function () {
 it('should be able to notify all event handlers', function () {
     $eventDispatcher = new EventDispatcher();
     $event = Mockery::namedMock('CitizenCreatedEvent', Event::class, [
-        ['name' => 'Citizen name', 'email' => 'email@citizen.com']
+        ['name' => 'Citizen name', 'email' => 'email@citizen.com'],
     ]);
     $eventHandler = Mockery::mock(stdClass::class, EventHandlerInterface::class);
     $eventHandler->shouldReceive('handle')->once()->with($event);

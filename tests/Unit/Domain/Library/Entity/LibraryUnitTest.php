@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Domain\Library\Entity\Library;
+use Core\Domain\Library\Entity\Library;
 
 it('should be throw an exception if name received dont has at least 3 characters', function () {
     $payload = [

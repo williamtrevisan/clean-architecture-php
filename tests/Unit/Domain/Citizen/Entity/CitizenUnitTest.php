@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Domain\Citizen\Entity\Citizen;
+use Core\Domain\Citizen\Entity\Citizen;
 
 it('should be throw an exception if name received dont has at least 3 characters', function () {
     $payload = [

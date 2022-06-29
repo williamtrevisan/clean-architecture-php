@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Domain\Book\Entity\Book;
+use Core\Domain\Book\Entity\Book;
 
 it('should be throw an exception if library id received is null', function () {
     $payload = [

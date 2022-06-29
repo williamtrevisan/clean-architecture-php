@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Domain\Citizen\Factory\CitizenFactory;
+use Core\Domain\Citizen\Factory\CitizenFactory;
 
 it('should be able to create a new citizen', function () {
     $payload = ['name' => 'Citizen name', 'email' => 'email@email.com'];

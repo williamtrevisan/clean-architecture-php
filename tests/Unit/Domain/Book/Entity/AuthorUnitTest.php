@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Domain\Book\Entity\Author;
+use Core\Domain\Book\Entity\Author;
 
 it('should be throw an exception if name received dont has at least 3 characters', function () {
     $payload = ['id' => 'authorId', 'name' => 'Ci'];

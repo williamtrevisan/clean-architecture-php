@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Domain\Citizen\Event\CitizenCreatedEvent;
-use Domain\Citizen\Event\Handler\EchoCitizenDataWhenCitizenIsCreatedHandler;
-use Domain\Citizen\Factory\CitizenFactory;
-use Domain\shared\Event\EventDispatcher;
+use Core\Domain\Citizen\Event\CitizenCreatedEvent;
+use Core\Domain\Citizen\Event\Handler\EchoCitizenDataWhenCitizenIsCreatedHandler;
+use Core\Domain\Citizen\Factory\CitizenFactory;
+use Core\Domain\shared\Event\EventDispatcher;
 
 it('should be able to echo citizen data when citizen is created', function () {
     $eventDispatcher = new EventDispatcher();
@@ -13,7 +13,7 @@ it('should be able to echo citizen data when citizen is created', function () {
     $eventDispatcher->register('CitizenCreatedEvent', $eventHandler);
     $citizen = CitizenFactory::create([
         'name' => 'Citizen name',
-        'email' => 'email@citizen.com'
+        'email' => 'email@citizen.com',
     ]);
     $citizenCreatedEvent = new CitizenCreatedEvent($citizen);
 

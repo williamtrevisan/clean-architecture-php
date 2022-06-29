@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Domain\Book\Entity\Book;
-use Domain\Book\Service\BookService;
+use Core\Domain\Book\Entity\Book;
+use Core\Domain\Book\Service\BookService;
 
 it('should be able to change library id of all books', function () {
     $libraryId = 'libraryId2';
