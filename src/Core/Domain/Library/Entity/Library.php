@@ -15,7 +15,7 @@ class Library extends Entity
         protected string $email,
         ?Uuid $id = null,
     ) {
-        parent::__construct($id);
+        $this->id = $id ?? Uuid::create();
 
         $this->validate();
     }

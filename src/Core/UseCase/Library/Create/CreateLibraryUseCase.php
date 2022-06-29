@@ -18,7 +18,7 @@ class CreateLibraryUseCase
         $persistLibrary = $this->libraryRepository->create($library);
 
         return new CreateLibraryOutputDTO(
-            id: $persistLibrary->id,
+            id: $persistLibrary->getId(),
             name: $persistLibrary->name,
             email: $persistLibrary->email,
         );

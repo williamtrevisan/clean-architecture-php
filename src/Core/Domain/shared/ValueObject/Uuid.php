@@ -9,6 +9,7 @@ class Uuid
 {
     public function __construct(protected string $id)
     {
+        $this->ensureIsValid($id);
     }
 
     public function __toString(): string

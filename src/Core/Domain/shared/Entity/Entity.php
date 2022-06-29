@@ -8,13 +8,15 @@ use Core\Domain\shared\ValueObject\Uuid;
 
 abstract class Entity
 {
-    public function __construct(protected ?Uuid $id)
-    {
-        $this->id = $id ?? Uuid::create();
-    }
+    protected Uuid $id;
 
     public function __get(string $property)
     {
         return $this->{$property};
+    }
+
+    public function getId(): string
+    {
+        return (string) $this->id;
     }
 }
