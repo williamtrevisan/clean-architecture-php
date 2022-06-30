@@ -14,7 +14,9 @@ class FindLibraryUseCase
     public function execute(FindLibraryInputDTO $input): FindLibraryOutputDTO
     {
         $library = $this->libraryRepository->findByPk(id: $input->id);
-        if (! $library) throw new NotFoundException("Library with id: $input->id not found");
+        if (! $library) {
+            throw new NotFoundException("Library with id: $input->id not found");
+        }
 
         return new FindLibraryOutputDTO(
             id: $library->id,

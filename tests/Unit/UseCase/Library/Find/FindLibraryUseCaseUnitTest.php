@@ -22,7 +22,7 @@ it('should be throw an exception if cannot find a library by primary key', funct
 
     $findLibraryUseCase = new FindLibraryUseCase($libraryRepository);
     $findLibraryUseCase->execute($findLibraryInputDTO);
-})->throws(NotFoundException::class, "Library with id: fakeId not found");
+})->throws(NotFoundException::class, 'Library with id: fakeId not found');
 
 test('should be able to find a library by primary key', function () {
     $expectedLibraryId = RamseyUuid::uuid4()->toString();

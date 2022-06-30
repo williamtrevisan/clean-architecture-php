@@ -14,7 +14,9 @@ class UpdateLibraryUseCase
     public function execute(UpdateLibraryInputDTO $input): UpdateLibraryOutputDTO
     {
         $library = $this->libraryRepository->findByPk($input->id);
-        if (! $library) throw new NotFoundException("Library with id: $input->id not found");
+        if (! $library) {
+            throw new NotFoundException("Library with id: $input->id not found");
+        }
 
         $library->update(name: $input->name, email: $input->email);
 

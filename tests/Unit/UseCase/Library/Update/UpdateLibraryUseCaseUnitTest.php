@@ -15,17 +15,17 @@ it('should be throw an exception if cannot find a library for update', function 
     );
     $libraryRepository->shouldReceive('findByPk')->andReturn(null);
     $updateLibraryInputDTO = Mockery::mock(UpdateLibraryInputDTO::class, [
-        'libraryId', 'Library name updated', 'library.updated@email.com'
+        'libraryId', 'Library name updated', 'library.updated@email.com',
     ]);
 
     $updateLibraryUseCase = new UpdateLibraryUseCase($libraryRepository);
     $updateLibraryUseCase->execute($updateLibraryInputDTO);
-})->throws(NotFoundException::class, "Library with id: libraryId not found");
+})->throws(NotFoundException::class, 'Library with id: libraryId not found');
 
 test('should be able to update a library', function () {
     $expectedLibraryId = RamseyUuid::uuid4()->toString();
     $expectedLibrary = Mockery::mock(LibraryEntity::class, [
-        'Library name', 'library@email.com', new Uuid($expectedLibraryId)
+        'Library name', 'library@email.com', new Uuid($expectedLibraryId),
     ]);
     $expectedLibrary->shouldReceive('update')->once();
     $expectedLibrary->shouldReceive('getId')->andReturn($expectedLibraryId);
@@ -38,7 +38,7 @@ test('should be able to update a library', function () {
         ->with($expectedLibraryId)
         ->andReturn($expectedLibrary);
     $updateLibraryInputDTO = Mockery::mock(UpdateLibraryInputDTO::class, [
-        $expectedLibraryId, 'Library name updated', 'email.updated@library.com'
+        $expectedLibraryId, 'Library name updated', 'email.updated@library.com',
     ]);
 
     $updateLibraryUseCase = new UpdateLibraryUseCase($libraryRepository);

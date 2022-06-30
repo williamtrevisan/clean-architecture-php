@@ -18,7 +18,7 @@ test('should be able to create a new library', function () {
 
     $this->assertDatabaseHas('libraries', [
         'name' => 'Library name',
-        'email' => 'library@email.com'
+        'email' => 'library@email.com',
     ]);
     expect($persistLibrary->id)->not->toBeEmpty()
         ->and($persistLibrary)->toMatchObject([
@@ -26,4 +26,3 @@ test('should be able to create a new library', function () {
             'email' => 'library@email.com',
         ]);
 });
-

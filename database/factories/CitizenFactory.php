@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Library>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Citizen>
  */
-class LibraryFactory extends Factory
+class CitizenFactory extends Factory
 {
     public function definition(): array
     {

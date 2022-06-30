@@ -28,7 +28,9 @@ class LibraryEloquentRepository implements LibraryRepositoryInterface
     public function findByPk(string $id): ?Entity
     {
         $library = $this->libraryModel->find($id);
-        if (! $library) return null;
+        if (! $library) {
+            return null;
+        }
 
         return $this->toDomainEntity($library);
     }
@@ -38,7 +40,7 @@ class LibraryEloquentRepository implements LibraryRepositoryInterface
         $libraries = $this->libraryModel->all();
 
         return $libraries
-            ->map(fn($library) => $this->toDomainEntity($library))
+            ->map(fn ($library) => $this->toDomainEntity($library))
             ->toArray();
     }
 

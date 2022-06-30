@@ -16,7 +16,7 @@ it('should be throw an expection if cannot find a library for update', function 
     $updateLibraryInputDTO = new UpdateLibraryInputDTO(id: 'libraryId');
 
     $this->updateLibraryUseCase->execute($updateLibraryInputDTO);
-})->throws(NotFoundException::class, "Library with id: libraryId not found");
+})->throws(NotFoundException::class, 'Library with id: libraryId not found');
 
 test('should be able to update a library', function (string $name = '', string $email = '') {
     $expectedLibrary = LibraryModel::factory()->create();

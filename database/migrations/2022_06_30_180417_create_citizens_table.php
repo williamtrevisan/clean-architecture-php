@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::connection('sqlite')->create('libraries', function (Blueprint $table) {
+        Schema::connection('sqlite')->create('citizens', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email');
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('libraries');
+        Schema::dropIfExists('citizens');
     }
 };

@@ -5,9 +5,9 @@ use App\Repositories\Eloquent\LibraryEloquentRepository;
 use Core\UseCase\Library\List\ListLibrariesUseCase;
 
 beforeEach(function () {
-   $libraryModel = new LibraryModel();
-   $libraryRepository = new LibraryEloquentRepository($libraryModel);
-   $this->listLibrariesUseCase = new ListLibrariesUseCase($libraryRepository);
+    $libraryModel = new LibraryModel();
+    $libraryRepository = new LibraryEloquentRepository($libraryModel);
+    $this->listLibrariesUseCase = new ListLibrariesUseCase($libraryRepository);
 });
 
 test('should be able find all libraries and get empty result', function () {
