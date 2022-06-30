@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 use Core\Domain\Citizen\Entity\Citizen;
+use Core\Domain\shared\ValueObject\Uuid;
+use Ramsey\Uuid\Uuid as RamseyUuid;
 
 it('should be throw an exception if name received dont has at least 3 characters', function () {
     $payload = [
-        'id' => 'citizenId',
         'name' => 'Ci',
         'email' => 'email@citizen.com',
     ];
 
     new Citizen(
-        id: $payload['id'],
         name: $payload['name'],
         email: $payload['email'],
     );
@@ -20,13 +20,11 @@ it('should be throw an exception if name received dont has at least 3 characters
 
 it('should be throw an exception if name received is greater than 255 characters', function () {
     $payload = [
-        'id' => 'citizenId',
         'name' => random_bytes(256),
         'email' => 'email@citizen.com',
     ];
 
     new Citizen(
-        id: $payload['id'],
         name: $payload['name'],
         email: $payload['email'],
     );
@@ -34,29 +32,45 @@ it('should be throw an exception if name received is greater than 255 characters
 
 it('should be throw an exception if email received is invalid', function () {
     $payload = [
-        'id' => 'citizenId',
         'name' => 'Citizen name',
         'email' => 'email.com',
     ];
 
     new Citizen(
-        id: $payload['id'],
         name: $payload['name'],
         email: $payload['email'],
     );
 })->throws(InvalidArgumentException::class, 'The email must be valid');
 
-it('should be able to create a new citizen', function () {
+test('should be able to create a new citizen', function () {
     $payload = [
-        'id' => 'citizenId',
         'name' => 'Citizen name',
         'email' => 'email@citizen.com',
     ];
 
     $citizen = new Citizen(
-        id: $payload['id'],
         name: $payload['name'],
         email: $payload['email'],
+    );
+
+    expect($citizen->getId())->not->toBeEmpty()
+        ->and($citizen)->toMatchObject([
+            'name' => $payload['name'],
+            'email' => $payload['email'],
+        ]);
+});
+
+test('should be able to create a new citizen sending an id', function () {
+    $payload = [
+        'id' => RamseyUuid::uuid4()->toString(),
+        'name' => 'Citizen name',
+        'email' => 'email@citizen.com',
+    ];
+
+    $citizen = new Citizen(
+        name: $payload['name'],
+        email: $payload['email'],
+        id: new Uuid($payload['id']),
     );
 
     expect($citizen)->toMatchObject([
@@ -70,7 +84,6 @@ it('should be throw an exception if name received in update method dont has at l
     $payload = ['name' => 'Ci'];
 
     $citizen = new Citizen(
-        id: 'citizenId',
         name: 'Citizen name',
         email: 'email@citizen.com',
     );
@@ -81,7 +94,6 @@ it('should be throw an exception if name received in update is greater than 255 
     $payload = ['name' => random_bytes(256)];
 
     $citizen = new Citizen(
-        id: 'citizenId',
         name: 'Citizen name',
         email: 'email@citizen.com',
     );
@@ -92,18 +104,16 @@ it('should be throw an exception if email received in update is invalid', functi
     $payload = ['email' => 'email.com'];
 
     $citizen = new Citizen(
-        id: 'citizenId',
         name: 'Citizen name',
         email: 'email@citizen.com',
     );
     $citizen->update(email: $payload['email']);
 })->throws(InvalidArgumentException::class, 'The email must be valid');
 
-it('should be able to change citizen name', function () {
+test('should be able to change citizen name', function () {
     $payload = ['name' => 'Citizen name updated'];
 
     $citizen = new Citizen(
-        id: 'citizenId',
         name: 'Citizen name',
         email: 'email@citizen.com',
     );
@@ -112,11 +122,10 @@ it('should be able to change citizen name', function () {
     expect($citizen->name)->toBe($payload['name']);
 });
 
-it('should be able to change citizen email', function () {
+test('should be able to change citizen email', function () {
     $payload = ['email' => 'citizen@email.com'];
 
     $citizen = new Citizen(
-        id: 'citizenId',
         name: 'Citizen name',
         email: 'email@citizen.com',
     );
@@ -125,11 +134,10 @@ it('should be able to change citizen email', function () {
     expect($citizen->email)->toBe($payload['email']);
 });
 
-it('should be able to change citizen name and email', function () {
+test('should be able to change citizen name and email', function () {
     $payload = ['name' => 'Citizen name updated', 'email' => 'citizen@email.com'];
 
     $citizen = new Citizen(
-        id: 'citizenId',
         name: 'Citizen name',
         email: 'email@citizen.com',
     );

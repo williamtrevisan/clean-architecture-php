@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Core\Domain\Citizen\Entity;
 
 use Core\Domain\shared\Entity\Entity;
+use Core\Domain\shared\ValueObject\Uuid;
 use InvalidArgumentException;
 
 class Citizen extends Entity
 {
     public function __construct(
-        string $id,
         protected string $name,
         protected string $email,
+        ?Uuid $id = null,
     ) {
-        $this->id = $id;
+        $this->id = $id ?? Uuid::create();
 
         $this->validate();
     }
