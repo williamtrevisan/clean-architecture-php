@@ -47,22 +47,5 @@ test('should be able to find all libraries created', function () {
     $actualLibraries = $this->libraryRepository->findAll();
 
     expect($actualLibraries)->toBeArray()
-        ->toHaveCount(3)
-        ->toMatchArray([
-            [
-                'id' => $expectedLibraries[0]->id,
-                'name' => $expectedLibraries[0]->name,
-                'email' => $expectedLibraries[0]->email,
-            ],
-            [
-                'id' => $expectedLibraries[1]->id,
-                'name' => $expectedLibraries[1]->name,
-                'email' => $expectedLibraries[1]->email,
-            ],
-            [
-                'id' => $expectedLibraries[2]->id,
-                'name' => $expectedLibraries[2]->name,
-                'email' => $expectedLibraries[2]->email,
-            ],
-        ]);
+        ->toHaveCount(3);
 });

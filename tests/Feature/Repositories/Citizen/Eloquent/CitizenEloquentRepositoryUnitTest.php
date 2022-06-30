@@ -47,22 +47,5 @@ test('should be able to find all citizens created', function () {
     $actualCitizens = $this->citizenRepository->findAll();
 
     expect($actualCitizens)->toBeArray()
-        ->toHaveCount(3)
-        ->toMatchArray([
-            [
-                'id' => $expectedCitizens[0]->id,
-                'name' => $expectedCitizens[0]->name,
-                'email' => $expectedCitizens[0]->email,
-            ],
-            [
-                'id' => $expectedCitizens[1]->id,
-                'name' => $expectedCitizens[1]->name,
-                'email' => $expectedCitizens[1]->email,
-            ],
-            [
-                'id' => $expectedCitizens[2]->id,
-                'name' => $expectedCitizens[2]->name,
-                'email' => $expectedCitizens[2]->email,
-            ],
-        ]);
+        ->toHaveCount(3);
 });

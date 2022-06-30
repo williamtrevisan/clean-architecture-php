@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Core\Domain\Book\Entity;
 
 use Core\Domain\shared\Entity\Entity;
+use Core\Domain\shared\ValueObject\Uuid;
 use InvalidArgumentException;
 
 class Book extends Entity
@@ -12,19 +13,24 @@ class Book extends Entity
     protected array $authorsId = [];
 
     public function __construct(
-        string $id,
-        protected ?string $libraryId,
+        protected Uuid $libraryId,
         protected string $title,
         protected ?int $pageNumber,
         protected ?int $yearLaunched,
+        ?Uuid $id = null,
     ) {
-        $this->id = $id;
+        $this->id = $id ?? Uuid::create();
 
         $this->validate();
     }
 
+    public function getLibraryId(): string
+    {
+        return (string) $this->libraryId;
+    }
+
     public function update(
-        ?string $libraryId = null,
+        ?Uuid $libraryId = null,
         string $title = '',
         ?int $pageNumber = null,
         ?int $yearLaunched = null
