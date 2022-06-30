@@ -35,7 +35,11 @@ class LibraryEloquentRepository implements LibraryRepositoryInterface
 
     public function findAll(): array
     {
-        return $this->libraryModel->all()->toArray();
+        $libraries = $this->libraryModel->all();
+
+        return $libraries
+            ->map(fn($library) => $this->toDomainEntity($library))
+            ->toArray();
     }
 
     public function update(Entity $entity): Entity
