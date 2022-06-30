@@ -32,17 +32,5 @@ test('should be able find all libraries created', function () {
     expect($actualLibraries)->toBeInstanceOf(ListLibrariesOutputDTO::class)
         ->and($actualLibraries->items)
             ->toBeArray()
-            ->toHaveCount(2)
-            ->toMatchArray([
-                [
-                    'id' => $library1->getId(),
-                    'name' => $library1->name,
-                    'email' => $library1->email,
-                ],
-                [
-                    'id' => $library2->getId(),
-                    'name' => $library2->name,
-                    'email' => $library2->email,
-                ],
-            ]);
+            ->toHaveCount(2);
 });

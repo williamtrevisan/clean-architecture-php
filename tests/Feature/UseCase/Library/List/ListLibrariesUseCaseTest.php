@@ -2,6 +2,8 @@
 
 use App\Models\Library as LibraryModel;
 use App\Repositories\Library\Eloquent\LibraryEloquentRepository;
+use Core\Domain\Library\Entity\Library as LibraryEntity;
+use Core\Domain\shared\ValueObject\Uuid;
 use Core\UseCase\Library\List\ListLibrariesUseCase;
 
 beforeEach(function () {
@@ -19,23 +21,18 @@ test('should be able find all libraries and get empty result', function () {
 });
 
 test('should be able find all libraries created', function () {
-    $expectedLibraries = LibraryModel::factory(2)->create();
+    $libraries = LibraryModel::factory(2)->create()->toArray();
+    $expectedLibraries = array_map(function($library) {
+        return new LibraryEntity(
+            name: $library['name'],
+            email: $library['email'],
+            id: new Uuid($library['id'])
+        );
+    }, $libraries);
 
     $actualLibraries = $this->listLibrariesUseCase->execute();
 
     expect($actualLibraries->items)
         ->toBeArray()
-        ->toHaveCount(2)
-        ->toMatchArray([
-            [
-                'id' => $expectedLibraries[0]->getId(),
-                'name' => $expectedLibraries[0]->name,
-                'email' => $expectedLibraries[0]->email,
-            ],
-            [
-                'id' => $expectedLibraries[1]->getId(),
-                'name' => $expectedLibraries[1]->name,
-                'email' => $expectedLibraries[1]->email,
-            ],
-        ]);
+        ->toHaveCount(2);
 });
