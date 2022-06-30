@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Library\Eloquent;
 
 use App\Models\Library as LibraryModel;
 use Core\Domain\Library\Entity\Library;

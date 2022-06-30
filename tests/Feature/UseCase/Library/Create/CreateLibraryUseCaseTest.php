@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Library as LibraryModel;
-use App\Repositories\Eloquent\LibraryEloquentRepository;
+use App\Repositories\Library\Eloquent\LibraryEloquentRepository;
 use Core\UseCase\Library\Create\CreateLibraryInputDTO;
 use Core\UseCase\Library\Create\CreateLibraryUseCase;
 

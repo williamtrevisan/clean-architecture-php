@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Library as LibraryModel;
-use App\Repositories\Eloquent\LibraryEloquentRepository;
+use App\Repositories\Library\Eloquent\LibraryEloquentRepository;
 use Core\Domain\shared\Exception\NotFoundException;
 use Core\UseCase\Library\Update\UpdateLibraryInputDTO;
 use Core\UseCase\Library\Update\UpdateLibraryUseCase;
