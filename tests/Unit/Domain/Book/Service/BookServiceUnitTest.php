@@ -13,14 +13,14 @@ it('should be able to change library id of all books', function () {
     $book1 = new Book(
         libraryId: new Uuid($libraryId),
         title: 'Book1 title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
         id: new Uuid(RamseyUuid::uuid4()->toString()),
     );
     $book2 = new Book(
         libraryId: new Uuid($libraryId),
         title: 'Book2 title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
         id: new Uuid(RamseyUuid::uuid4()->toString()),
     );

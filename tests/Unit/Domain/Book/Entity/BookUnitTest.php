@@ -10,14 +10,14 @@ it('should be throw an exception if name received dont has at least 3 characters
     $payload = [
         'libraryId' => RamseyUuid::uuid4()->toString(),
         'title' => 'Bo',
-        'pageNumber' => 196,
+        'numberOfPages' => 196,
         'yearLaunched' => 2001,
     ];
 
     new Book(
         libraryId: new Uuid($payload['libraryId']),
         title: $payload['title'],
-        pageNumber: $payload['pageNumber'],
+        numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],
     );
 })->throws(InvalidArgumentException::class, 'The title must be at least 3 characters');
@@ -26,46 +26,46 @@ it('should be throw an exception if name received is greater than 255 characters
     $payload = [
         'libraryId' => RamseyUuid::uuid4()->toString(),
         'title' => random_bytes(256),
-        'pageNumber' => 196,
+        'numberOfPages' => 196,
         'yearLaunched' => 2001,
     ];
 
     new Book(
         libraryId: new Uuid($payload['libraryId']),
         title: $payload['title'],
-        pageNumber: $payload['pageNumber'],
+        numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],
     );
 })->throws(InvalidArgumentException::class, 'The title must not be greater than 255 characters');
 
-it('should be throw an exception if page number received is null', function () {
+it('should be throw an exception if number of pages received is null', function () {
     $payload = [
         'libraryId' => RamseyUuid::uuid4()->toString(),
         'title' => 'Book title',
-        'pageNumber' => null,
+        'numberOfPages' => null,
         'yearLaunched' => 2001,
     ];
 
     new Book(
         libraryId: new Uuid($payload['libraryId']),
         title: $payload['title'],
-        pageNumber: $payload['pageNumber'],
+        numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],
     );
-})->throws(InvalidArgumentException::class, 'The page number is required');
+})->throws(InvalidArgumentException::class, 'The number of pages is required');
 
 it('should be throw an exception if year launched received is null', function () {
     $payload = [
         'libraryId' => RamseyUuid::uuid4()->toString(),
         'title' => 'Book title',
-        'pageNumber' => 196,
+        'numberOfPages' => 196,
         'yearLaunched' => null,
     ];
 
     new Book(
         libraryId: new Uuid($payload['libraryId']),
         title: $payload['title'],
-        pageNumber: $payload['pageNumber'],
+        numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],
     );
 })->throws(InvalidArgumentException::class, 'The year launched is required');
@@ -74,14 +74,14 @@ test('should be able to create a new book', function () {
     $payload = [
         'libraryId' => RamseyUuid::uuid4()->toString(),
         'title' => 'Book title',
-        'pageNumber' => 196,
+        'numberOfPages' => 196,
         'yearLaunched' => 2001,
     ];
 
     $book = new Book(
         libraryId: new Uuid($payload['libraryId']),
         title: $payload['title'],
-        pageNumber: $payload['pageNumber'],
+        numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],
     );
 
@@ -89,7 +89,7 @@ test('should be able to create a new book', function () {
         ->and($book)->toMatchObject([
             'libraryId' => new Uuid($payload['libraryId']),
             'title' => $payload['title'],
-            'pageNumber' => $payload['pageNumber'],
+            'numberOfPages' => $payload['numberOfPages'],
             'yearLaunched' => $payload['yearLaunched'],
         ]);
 });
@@ -99,14 +99,14 @@ test('should be able to create a new book sending an id', function () {
         'id' => RamseyUuid::uuid4()->toString(),
         'libraryId' => RamseyUuid::uuid4()->toString(),
         'title' => 'Book title',
-        'pageNumber' => 196,
+        'numberOfPages' => 196,
         'yearLaunched' => 2001,
     ];
 
     $book = new Book(
         libraryId: new Uuid($payload['libraryId']),
         title: $payload['title'],
-        pageNumber: $payload['pageNumber'],
+        numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],
         id: new Uuid($payload['id']),
     );
@@ -115,7 +115,7 @@ test('should be able to create a new book sending an id', function () {
         'id' => $payload['id'],
         'libraryId' => new Uuid($payload['libraryId']),
         'title' => $payload['title'],
-        'pageNumber' => $payload['pageNumber'],
+        'numberOfPages' => $payload['numberOfPages'],
         'yearLaunched' => $payload['yearLaunched'],
     ]);
 });
@@ -125,7 +125,7 @@ test('should be able to add an author to book', function () {
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
 
@@ -141,7 +141,7 @@ test('should be able to add more than once authors to book', function () {
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
 
@@ -157,7 +157,7 @@ test('should be able to remove an author to book', function () {
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
     $book->addAuthor(authorId: $authorId);
@@ -174,7 +174,7 @@ test('should be able to update a book library id', function () {
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
     $book->update(libraryId: new Uuid($payload['libraryId']));
@@ -188,7 +188,7 @@ it('should be throw an exception if name received to update dont has at least 3 
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
     $book->update(title: $payload['title']);
@@ -200,7 +200,7 @@ it('should be throw an exception if name received to update is greater than 255 
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
     $book->update(title: $payload['title']);
@@ -212,7 +212,7 @@ test('should be able to update a book title', function () {
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
     $book->update(title: $payload['title']);
@@ -220,18 +220,18 @@ test('should be able to update a book title', function () {
     expect($payload['title'])->toBe($book->title);
 });
 
-test('should be able to update a book page number', function () {
-    $payload = ['pageNumber' => 251];
+test('should be able to update a book number of pages', function () {
+    $payload = ['numberOfPages' => 251];
 
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
-    $book->update(pageNumber: $payload['pageNumber']);
+    $book->update(numberOfPages: $payload['numberOfPages']);
 
-    expect($payload['pageNumber'])->toBe($book->pageNumber);
+    expect($payload['numberOfPages'])->toBe($book->numberOfPages);
 });
 
 test('should be able to update a book year launched', function () {
@@ -240,7 +240,7 @@ test('should be able to update a book year launched', function () {
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
     $book->update(yearLaunched: $payload['yearLaunched']);
@@ -252,27 +252,27 @@ test('should be able to update all book data', function () {
     $payload = [
         'libraryId' => RamseyUuid::uuid4()->toString(),
         'title' => 'Book title updated',
-        'pageNumber' => 251,
+        'numberOfPages' => 251,
         'yearLaunched' => 2010,
     ];
 
     $book = new Book(
         libraryId: new Uuid(RamseyUuid::uuid4()->toString()),
         title: 'Book title',
-        pageNumber: 201,
+        numberOfPages: 201,
         yearLaunched: 2009,
     );
     $book->update(
         libraryId: new Uuid($payload['libraryId']),
         title: $payload['title'],
-        pageNumber: $payload['pageNumber'],
+        numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],
     );
 
     expect($book)->toMatchObject([
         'libraryId' => new Uuid($payload['libraryId']),
         'title' => $payload['title'],
-        'pageNumber' => $payload['pageNumber'],
+        'numberOfPages' => $payload['numberOfPages'],
         'yearLaunched' => $payload['yearLaunched'],
     ]);
 });

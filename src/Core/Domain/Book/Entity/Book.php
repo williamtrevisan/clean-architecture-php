@@ -15,7 +15,7 @@ class Book extends Entity
     public function __construct(
         protected Uuid $libraryId,
         protected string $title,
-        protected ?int $pageNumber,
+        protected ?int $numberOfPages,
         protected ?int $yearLaunched,
         ?Uuid $id = null,
     ) {
@@ -32,12 +32,12 @@ class Book extends Entity
     public function update(
         ?Uuid $libraryId = null,
         string $title = '',
-        ?int $pageNumber = null,
+        ?int $numberOfPages = null,
         ?int $yearLaunched = null
     ): void {
         $this->libraryId = $libraryId ?? $this->libraryId;
         $this->title = $title ?: $this->title;
-        $this->pageNumber = $pageNumber ?? $this->pageNumber;
+        $this->numberOfPages = $numberOfPages ?? $this->numberOfPages;
         $this->yearLaunched = $yearLaunched ?? $this->yearLaunched;
 
         $this->validate();
@@ -71,8 +71,8 @@ class Book extends Entity
             );
         }
 
-        if (! $this->pageNumber) {
-            throw new InvalidArgumentException('The page number is required');
+        if (! $this->numberOfPages) {
+            throw new InvalidArgumentException('The number of pages is required');
         }
 
         if (! $this->yearLaunched) {
