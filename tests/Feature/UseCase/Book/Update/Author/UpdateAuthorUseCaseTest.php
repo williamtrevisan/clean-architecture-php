@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\Author as AuthorModel;
-use App\Repositories\Author\Eloquent\AuthorEloquentRepository;
+use App\Repositories\Book\Eloquent\AuthorEloquentRepository;
 use Core\Domain\shared\Exception\NotFoundException;
-use Core\UseCase\Author\Update\UpdateAuthorInputDTO;
-use Core\UseCase\Author\Update\UpdateAuthorUseCase;
+use Core\UseCase\Book\Update\Author\UpdateAuthorInputDTO;
+use Core\UseCase\Book\Update\Author\UpdateAuthorUseCase;
 
 beforeEach(function () {
     $authorModel = new AuthorModel();
@@ -13,7 +13,9 @@ beforeEach(function () {
 });
 
 it('should be throw an expection if cannot find a author for update', function () {
-    $updateAuthorInputDTO = new UpdateAuthorInputDTO(id: 'authorId');
+    $updateAuthorInputDTO = new UpdateAuthorInputDTO(
+        id: 'authorId', name: 'Author name updated'
+    );
 
     $this->updateAuthorUseCase->execute($updateAuthorInputDTO);
 })->throws(NotFoundException::class, 'Author with id: authorId not found');

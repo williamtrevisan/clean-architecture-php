@@ -3,9 +3,9 @@
 use Core\Domain\Book\Entity\Book;
 use Core\Domain\Book\Repository\BookRepositoryInterface;
 use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Book\Create\CreateBookInputDTO;
-use Core\UseCase\Book\Create\CreateBookOutputDTO;
-use Core\UseCase\Book\Create\CreateBookUseCase;
+use Core\UseCase\Book\Create\Book\CreateBookInputDTO;
+use Core\UseCase\Book\Create\Book\CreateBookOutputDTO;
+use Core\UseCase\Book\Create\Book\CreateBookUseCase;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 beforeAll(function () {

@@ -1,9 +1,10 @@
 <?php
 
-use Core\Domain\book\Entity\book as BookEntity;
-use Core\Domain\book\Repository\BookRepositoryInterface;
-use Core\UseCase\book\List\ListBooksOutputDTO;
-use Core\UseCase\book\List\ListBooksUseCase;
+use Core\Domain\Book\Entity\book as BookEntity;
+use Core\Domain\Book\Repository\BookRepositoryInterface;
+use Core\Domain\shared\ValueObject\Uuid;
+use Core\UseCase\Book\List\Book\ListBooksOutputDTO;
+use Core\UseCase\Book\List\Book\ListBooksUseCase;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 test('should be able find all books and get empty result', function () {

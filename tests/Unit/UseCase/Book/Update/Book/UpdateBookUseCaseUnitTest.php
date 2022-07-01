@@ -4,9 +4,9 @@ use Core\Domain\Book\Entity\Book as BookEntity;
 use Core\Domain\Book\Repository\BookRepositoryInterface;
 use Core\Domain\shared\Exception\NotFoundException;
 use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Book\Update\UpdateBookInputDTO;
-use Core\UseCase\Book\Update\UpdateBookOutputDTO;
-use Core\UseCase\Book\Update\UpdateBookUseCase;
+use Core\UseCase\Book\Update\Book\UpdateBookInputDTO;
+use Core\UseCase\Book\Update\Book\UpdateBookOutputDTO;
+use Core\UseCase\Book\Update\Book\UpdateBookUseCase;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 it('should be throw an exception if cannot find a book for update', function () {
@@ -23,7 +23,7 @@ it('should be throw an exception if cannot find a book for update', function () 
 test('should be able to update a book', function () {
     $expectedBookId = RamseyUuid::uuid4()->toString();
     $expectedLibraryId = RamseyUuid::uuid4()->toString();
-    $expectedBook = Mockery::mock(Book::class, [
+    $expectedBook = Mockery::mock(BookEntity::class, [
         new Uuid($expectedLibraryId),
         'Book title',
         205,

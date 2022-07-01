@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\Author as AuthorModel;
-use App\Repositories\Author\Eloquent\AuthorEloquentRepository;
-use Core\Domain\Author\Entity\Author as AuthorEntity;
+use App\Repositories\Book\Eloquent\AuthorEloquentRepository;
+use Core\Domain\Book\Entity\Author as AuthorEntity;
 use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Author\List\ListAuthorsUseCase;
+use Core\UseCase\Book\List\Author\ListAuthorsUseCase;
 
 beforeEach(function () {
     $authorModel = new AuthorModel();

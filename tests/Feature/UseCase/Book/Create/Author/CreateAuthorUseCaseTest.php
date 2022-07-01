@@ -1,9 +1,9 @@
 <?php
 
 use App\Models\Author as AuthorModel;
-use App\Repositories\Author\Eloquent\AuthorEloquentRepository;
-use Core\UseCase\Author\Create\CreateAuthorInputDTO;
-use Core\UseCase\Author\Create\CreateAuthorUseCase;
+use App\Repositories\Book\Eloquent\AuthorEloquentRepository;
+use Core\UseCase\Book\Create\Author\CreateAuthorInputDTO;
+use Core\UseCase\Book\Create\Author\CreateAuthorUseCase;
 
 test('should be able to create a new author', function () {
     $authorModel = new AuthorModel();
@@ -13,7 +13,7 @@ test('should be able to create a new author', function () {
     $createAuthorUseCase = new CreateAuthorUseCase($authorRepository);
     $persistAuthor = $createAuthorUseCase->execute($createAuthorInputDTO);
 
-    $this->assertDatabaseHas('authors', ['name' => $persistAuthor->getId()]);
+    $this->assertDatabaseHas('authors', ['id' => $persistAuthor->id]);
     expect($persistAuthor->id)->not->toBeEmpty()
         ->and($persistAuthor)->toMatchObject([
             'name' => 'Author name'

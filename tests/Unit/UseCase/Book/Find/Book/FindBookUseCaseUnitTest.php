@@ -4,9 +4,9 @@ use Core\Domain\Book\Entity\Book;
 use Core\Domain\Book\Repository\BookRepositoryInterface;
 use Core\Domain\shared\Exception\NotFoundException;
 use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Book\Find\FindBookInputDTO;
-use Core\UseCase\Book\Find\FindBookOutputDTO;
-use Core\UseCase\Book\Find\FindBookUseCase;
+use Core\UseCase\Book\Find\Book\FindBookInputDTO;
+use Core\UseCase\Book\Find\Book\FindBookOutputDTO;
+use Core\UseCase\Book\Find\Book\FindBookUseCase;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 beforeAll(function () {

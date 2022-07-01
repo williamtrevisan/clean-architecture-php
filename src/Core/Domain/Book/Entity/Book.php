@@ -30,12 +30,12 @@ class Book extends Entity
     }
 
     public function update(
-        ?Uuid $libraryId = null,
+        string $libraryId = '',
         string $title = '',
         ?int $numberOfPages = null,
         ?int $yearLaunched = null
     ): void {
-        $this->libraryId = $libraryId ?? $this->libraryId;
+        $this->libraryId = $libraryId ? new Uuid($libraryId) : $this->libraryId;
         $this->title = $title ?: $this->title;
         $this->numberOfPages = $numberOfPages ?? $this->numberOfPages;
         $this->yearLaunched = $yearLaunched ?? $this->yearLaunched;

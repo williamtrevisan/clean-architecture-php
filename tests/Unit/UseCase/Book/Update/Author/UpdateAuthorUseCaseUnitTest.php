@@ -1,12 +1,12 @@
 <?php
 
-use Core\Domain\Author\Entity\Author as AuthorEntity;
-use Core\Domain\Author\Repository\AuthorRepositoryInterface;
+use Core\Domain\Book\Entity\Author as AuthorEntity;
+use Core\Domain\Book\Repository\AuthorRepositoryInterface;
 use Core\Domain\shared\Exception\NotFoundException;
 use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Author\Update\UpdateAuthorInputDTO;
-use Core\UseCase\Author\Update\UpdateAuthorOutputDTO;
-use Core\UseCase\Author\Update\UpdateAuthorUseCase;
+use Core\UseCase\Book\Update\Author\UpdateAuthorInputDTO;
+use Core\UseCase\Book\Update\Author\UpdateAuthorOutputDTO;
+use Core\UseCase\Book\Update\Author\UpdateAuthorUseCase;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 it('should be throw an exception if cannot find a author for update', function () {
@@ -27,7 +27,7 @@ test('should be able to update a author', function () {
     $expectedAuthor = Mockery::mock(AuthorEntity::class, [
         'Author name', new Uuid($expectedAuthorId)
     ]);
-    $expectedAuthor->shouldReceive('update')->once();
+    $expectedAuthor->shouldReceive('changeName')->once();
     $expectedAuthor->shouldReceive('getId')->andReturn($expectedAuthorId);
     $authorRepository = Mockery::mock(
         stdClass::class, AuthorRepositoryInterface::class

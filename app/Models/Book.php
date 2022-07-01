@@ -17,7 +17,7 @@ class Book extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id', 'id_library', 'title', 'page_number', 'year_launched'
+        'id', 'library_id', 'title', 'number_of_pages', 'year_launched'
     ];
 
     protected $casts = ['id' => 'string', 'id_library' => 'string'];

@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Book as BookModel;
 use App\Repositories\Book\Eloquent\BookEloquentRepository;
-use Core\Domain\Book\Entity\Book as BookEntity;
-use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Book\List\ListBooksUseCase;
+use Core\UseCase\Book\List\Book\ListBooksUseCase;
 
 beforeEach(function () {
     $bookModel = new BookModel();
@@ -21,16 +21,7 @@ test('should be able find all books and get empty result', function () {
 });
 
 test('should be able find all books created', function () {
-    $books = BookModel::factory(2)->create()->toArray();
-    $expectedBooks = array_map(function($book) {
-        return new BookEntity(
-            libraryId: $book['library_id'],
-            title: $book['title'],
-            numberOfPages: $book['number_of_pages'],
-            yearLaunched: $book['year_launched'],
-            id: new Uuid($book['id'])
-        );
-    }, $books);
+    BookModel::factory(2)->create()->toArray();
 
     $actualBooks = $this->listBooksUseCase->execute();
 

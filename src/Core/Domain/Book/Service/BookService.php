@@ -10,7 +10,7 @@ class BookService
 {
     public static function changeLibraryId(
         array $listBooks,
-        Uuid $libraryId
+        string $libraryId
     ): array {
         foreach ($listBooks as $book) {
             $book->update(libraryId: $libraryId);

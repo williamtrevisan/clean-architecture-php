@@ -177,7 +177,7 @@ test('should be able to update a book library id', function () {
         numberOfPages: 201,
         yearLaunched: 2009,
     );
-    $book->update(libraryId: new Uuid($payload['libraryId']));
+    $book->update(libraryId: $payload['libraryId']);
 
     expect($book->getLibraryId())->toBe($payload['libraryId']);
 });
@@ -263,7 +263,7 @@ test('should be able to update all book data', function () {
         yearLaunched: 2009,
     );
     $book->update(
-        libraryId: new Uuid($payload['libraryId']),
+        libraryId: $payload['libraryId'],
         title: $payload['title'],
         numberOfPages: $payload['numberOfPages'],
         yearLaunched: $payload['yearLaunched'],

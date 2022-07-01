@@ -3,8 +3,8 @@
 use App\Models\Book as BookModel;
 use App\Repositories\Book\Eloquent\BookEloquentRepository;
 use Core\Domain\shared\Exception\NotFoundException;
-use Core\UseCase\Book\Find\FindBookInputDTO;
-use Core\UseCase\Book\Find\FindBookUseCase;
+use Core\UseCase\Book\Find\Book\FindBookInputDTO;
+use Core\UseCase\Book\Find\Book\FindBookUseCase;
 
 beforeEach(function () {
     $bookModel = new BookModel();

@@ -1,12 +1,12 @@
 <?php
 
-use Core\Domain\Author\Entity\Author;
-use Core\Domain\Author\Repository\AuthorRepositoryInterface;
+use Core\Domain\Book\Entity\Author;
+use Core\Domain\Book\Repository\AuthorRepositoryInterface;
 use Core\Domain\shared\Exception\NotFoundException;
 use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Author\Find\FindAuthorInputDTO;
-use Core\UseCase\Author\Find\FindAuthorOutputDTO;
-use Core\UseCase\Author\Find\FindAuthorUseCase;
+use Core\UseCase\Book\Find\Author\FindAuthorInputDTO;
+use Core\UseCase\Book\Find\Author\FindAuthorOutputDTO;
+use Core\UseCase\Book\Find\Author\FindAuthorUseCase;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 beforeAll(function () {

@@ -1,11 +1,11 @@
 <?php
 
-use Core\Domain\Author\Entity\Author;
-use Core\Domain\Author\Repository\AuthorRepositoryInterface;
+use Core\Domain\Book\Entity\Author;
+use Core\Domain\Book\Repository\AuthorRepositoryInterface;
 use Core\Domain\shared\ValueObject\Uuid;
-use Core\UseCase\Author\Create\CreateAuthorInputDTO;
-use Core\UseCase\Author\Create\CreateAuthorOutputDTO;
-use Core\UseCase\Author\Create\CreateAuthorUseCase;
+use Core\UseCase\Book\Create\Author\CreateAuthorInputDTO;
+use Core\UseCase\Book\Create\Author\CreateAuthorOutputDTO;
+use Core\UseCase\Book\Create\Author\CreateAuthorUseCase;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 beforeAll(function () {

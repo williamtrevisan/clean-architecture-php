@@ -25,7 +25,7 @@ it('should be able to change library id of all books', function () {
         id: new Uuid(RamseyUuid::uuid4()->toString()),
     );
 
-    BookService::changeLibraryId([$book1, $book2], new Uuid($libraryIdForUpdate));
+    BookService::changeLibraryId([$book1, $book2], $libraryIdForUpdate);
 
     expect($book1->getLibraryId())->toBe($libraryIdForUpdate)
         ->and($book2->getLibraryId())->toBe($libraryIdForUpdate);

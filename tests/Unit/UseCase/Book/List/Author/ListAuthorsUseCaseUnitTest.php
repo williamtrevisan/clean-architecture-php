@@ -1,9 +1,9 @@
 <?php
 
-use Core\Domain\Author\Entity\Author as AuthorEntity;
-use Core\Domain\Author\Repository\AuthorRepositoryInterface;
-use Core\UseCase\Author\List\ListAuthorsOutputDTO;
-use Core\UseCase\Author\List\ListAuthorsUseCase;
+use Core\Domain\Book\Entity\Author as AuthorEntity;
+use Core\Domain\Book\Repository\AuthorRepositoryInterface;
+use Core\UseCase\Book\List\Author\ListAuthorsOutputDTO;
+use Core\UseCase\Book\List\Author\ListAuthorsUseCase;
 
 test('should be able find all authors and get empty result', function () {
     $authorRepository = Mockery::mock(stdClass::class, AuthorRepositoryInterface::class);

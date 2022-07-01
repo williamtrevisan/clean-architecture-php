@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\Author as AuthorModel;
-use App\Repositories\Author\Eloquent\AuthorEloquentRepository;
+use App\Repositories\Book\Eloquent\AuthorEloquentRepository;
 use Core\Domain\shared\Exception\NotFoundException;
-use Core\UseCase\Author\Find\FindAuthorInputDTO;
-use Core\UseCase\Author\Find\FindAuthorUseCase;
+use Core\UseCase\Book\Find\Author\FindAuthorInputDTO;
+use Core\UseCase\Book\Find\Author\FindAuthorUseCase;
 
 beforeEach(function () {
     $authorModel = new AuthorModel();
