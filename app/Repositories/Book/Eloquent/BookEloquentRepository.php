@@ -24,6 +24,10 @@ class BookEloquentRepository implements BookRepositoryInterface
             'year_launched' => $entity->yearLaunched,
         ]);
 
+        if ($entity->authorsId) {
+            $book->authors()->sync($entity->authorsId);
+        }
+
         return $this->toDomainEntity($book);
     }
 
