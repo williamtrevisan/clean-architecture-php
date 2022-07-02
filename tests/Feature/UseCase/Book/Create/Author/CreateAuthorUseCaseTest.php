@@ -16,6 +16,6 @@ test('should be able to create a new author', function () {
     $this->assertDatabaseHas('authors', ['id' => $persistAuthor->id]);
     expect($persistAuthor->id)->not->toBeEmpty()
         ->and($persistAuthor)->toMatchObject([
-            'name' => 'Author name'
+            'name' => 'Author name',
         ]);
 });

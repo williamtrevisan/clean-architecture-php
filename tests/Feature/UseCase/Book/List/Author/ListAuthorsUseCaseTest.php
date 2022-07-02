@@ -22,7 +22,7 @@ test('should be able find all authors and get empty result', function () {
 
 test('should be able find all authors created', function () {
     $authors = AuthorModel::factory(2)->create()->toArray();
-    $expectedAuthors = array_map(function($author) {
+    $expectedAuthors = array_map(function ($author) {
         return new AuthorEntity(
             name: $author['name'],
             id: new Uuid($author['id'])

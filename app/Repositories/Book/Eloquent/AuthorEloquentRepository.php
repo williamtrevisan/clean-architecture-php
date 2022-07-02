@@ -17,10 +17,15 @@ class AuthorEloquentRepository implements AuthorRepositoryInterface
     public function create(Entity $entity): Entity
     {
         $author = $this->authorModel->create([
-            'id' => $entity->getId(), 'name' => $entity->name
+            'id' => $entity->getId(), 'name' => $entity->name,
         ]);
 
         return $this->toDomainEntity($author);
+    }
+
+    public function findAuthorsIdByListId(array $authorsId = []): array
+    {
+        return $this->authorModel->whereIn('id', $authorsId)->pluck('id')->toArray();
     }
 
     public function findByPk(string $id): ?Entity

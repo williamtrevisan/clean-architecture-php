@@ -11,6 +11,7 @@ class CreateBookInputDTO
         public string $title,
         public int $numberOfPages,
         public int $yearLaunched,
+        public array $authorsId = [],
     ) {
     }
 }

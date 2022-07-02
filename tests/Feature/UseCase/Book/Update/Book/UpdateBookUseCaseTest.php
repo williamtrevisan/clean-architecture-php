@@ -45,7 +45,7 @@ test('should be able to update a book', function (
     ]);
 })->with([
     'sending only library id' => [
-        'libraryId' => fn() => LibraryModel::factory()->create()->id,
+        'libraryId' => fn () => LibraryModel::factory()->create()->id,
         'title' => '',
         'numberOfPages' => null,
         'yearLaunched' => null,
@@ -69,7 +69,7 @@ test('should be able to update a book', function (
         'yearLaunched' => 2022,
     ],
     'sending all data' => [
-        'libraryId' => fn() => LibraryModel::factory()->create()->id,
+        'libraryId' => fn () => LibraryModel::factory()->create()->id,
         'title' => 'Book title updated',
         'numberOfPages' => 102,
         'yearLaunched' => 2022,

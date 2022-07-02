@@ -28,7 +28,7 @@ test('should be able to update a book', function () {
         'Book title',
         205,
         2000,
-        new Uuid($expectedBookId)
+        new Uuid($expectedBookId),
     ]);
     $expectedBook->shouldReceive('update')->once();
     $expectedBook->shouldReceive('getId')->andReturn($expectedBookId);

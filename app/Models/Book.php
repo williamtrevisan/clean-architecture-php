@@ -6,7 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
@@ -17,13 +17,13 @@ class Book extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id', 'library_id', 'title', 'number_of_pages', 'year_launched'
+        'id', 'library_id', 'title', 'number_of_pages', 'year_launched',
     ];
 
     protected $casts = ['id' => 'string', 'id_library' => 'string'];
 
-    public function authors(): HasMany
+    public function authors(): BelongsToMany
     {
-        return $this->hasMany(Author::class);
+        return $this->belongsToMany(Author::class, 'books_authors');
     }
 }

@@ -22,7 +22,7 @@ test('should be able find all libraries and get empty result', function () {
 
 test('should be able find all libraries created', function () {
     $libraries = LibraryModel::factory(2)->create()->toArray();
-    $expectedLibraries = array_map(function($library) {
+    $expectedLibraries = array_map(function ($library) {
         return new LibraryEntity(
             name: $library['name'],
             email: $library['email'],

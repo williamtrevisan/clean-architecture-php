@@ -15,7 +15,7 @@ it('should be throw an exception if cannot find a author for update', function (
     );
     $authorRepository->shouldReceive('findByPk')->andReturn(null);
     $updateAuthorInputDTO = Mockery::mock(UpdateAuthorInputDTO::class, [
-        'authorId', 'Author name updated'
+        'authorId', 'Author name updated',
     ]);
 
     $updateAuthorUseCase = new UpdateAuthorUseCase($authorRepository);
@@ -25,7 +25,7 @@ it('should be throw an exception if cannot find a author for update', function (
 test('should be able to update a author', function () {
     $expectedAuthorId = RamseyUuid::uuid4()->toString();
     $expectedAuthor = Mockery::mock(AuthorEntity::class, [
-        'Author name', new Uuid($expectedAuthorId)
+        'Author name', new Uuid($expectedAuthorId),
     ]);
     $expectedAuthor->shouldReceive('changeName')->once();
     $expectedAuthor->shouldReceive('getId')->andReturn($expectedAuthorId);
@@ -38,7 +38,7 @@ test('should be able to update a author', function () {
         ->with($expectedAuthorId)
         ->andReturn($expectedAuthor);
     $updateAuthorInputDTO = Mockery::mock(UpdateAuthorInputDTO::class, [
-        $expectedAuthorId, 'Author name updated'
+        $expectedAuthorId, 'Author name updated',
     ]);
 
     $updateAuthorUseCase = new UpdateAuthorUseCase($authorRepository);

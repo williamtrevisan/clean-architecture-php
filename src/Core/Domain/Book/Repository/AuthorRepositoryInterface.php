@@ -8,4 +8,5 @@ use Core\Domain\shared\Repository\RepositoryInterface;
 
 interface AuthorRepositoryInterface extends RepositoryInterface
 {
+    public function findAuthorsIdByListId(array $authorsId = []): array;
 }

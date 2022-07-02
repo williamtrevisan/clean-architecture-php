@@ -32,7 +32,7 @@ test('should be able to find a book by primary key', function () {
         'Book title',
         205,
         2000,
-        new Uuid($expectedBookId)
+        new Uuid($expectedBookId),
     ]);
     $expectedBook->shouldReceive('getId')->andReturn($expectedBookId);
     $expectedBook->shouldReceive('getLibraryId')->andReturn($expectedLibraryId);
