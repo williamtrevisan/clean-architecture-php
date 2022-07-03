@@ -55,8 +55,9 @@ it('should be throw an exception if cannot find a received library', function ()
 })->throws(NotFoundException::class, 'Library with id: libraryId not found');
 
 it('should be throw an exception if cannot find a received author', function () {
+    $library = LibraryModel::factory()->create();
     $createBookInputDTO = new CreateBookInputDTO(
-        libraryId: 'libraryId',
+        libraryId: $library->id,
         title: 'Book title',
         numberOfPages: 102,
         yearLaunched: 2013,
@@ -67,8 +68,9 @@ it('should be throw an exception if cannot find a received author', function () 
 })->throws(NotFoundException::class, 'Author with id: authorId not found');
 
 it('should be throw an exception if cannot find a received authors', function () {
+    $library = LibraryModel::factory()->create();
     $createBookInputDTO = new CreateBookInputDTO(
-        libraryId: 'libraryId',
+        libraryId: $library->id,
         title: 'Book title',
         numberOfPages: 102,
         yearLaunched: 2013,

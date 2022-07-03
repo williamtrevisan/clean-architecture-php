@@ -12,6 +12,7 @@ class UpdateBookInputDTO
         public string $title = '',
         public ?int $numberOfPages = null,
         public ?int $yearLaunched = null,
+        public array $authorsId = [],
     ) {
     }
 }

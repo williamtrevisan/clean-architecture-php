@@ -60,6 +60,9 @@ class BookEloquentRepository implements BookRepositoryInterface
             'number_of_pages' => $entity->numberOfPages,
             'year_launched' => $entity->yearLaunched,
         ]);
+        if ($entity->authorsId) {
+            $book->authors()->sync($entity->authorsId);
+        }
         $book->refresh();
 
         return $this->toDomainEntity($book);

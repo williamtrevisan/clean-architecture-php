@@ -1,16 +1,24 @@
 <?php
 
+use App\Models\Author as AuthorModel;
 use App\Models\Book as BookModel;
 use App\Models\Library as LibraryModel;
+use App\Repositories\Book\Eloquent\AuthorEloquentRepository;
 use App\Repositories\Book\Eloquent\BookEloquentRepository;
+use App\Repositories\Library\Eloquent\LibraryEloquentRepository;
+use App\Repositories\Transaction\DatabaseTransaction;
 use Core\Domain\shared\Exception\NotFoundException;
 use Core\UseCase\Book\Update\Book\UpdateBookInputDTO;
 use Core\UseCase\Book\Update\Book\UpdateBookUseCase;
 
 beforeEach(function () {
-    $bookModel = new BookModel();
-    $bookRepository = new BookEloquentRepository($bookModel);
-    $this->updateBookUseCase = new UpdateBookUseCase($bookRepository);
+    $bookRepository = new BookEloquentRepository(new BookModel());
+    $libraryRepository = new LibraryEloquentRepository(new LibraryModel());
+    $authorRepository = new AuthorEloquentRepository(new AuthorModel());
+    $databaseTransaction = new DatabaseTransaction();
+    $this->updateBookUseCase = new UpdateBookUseCase(
+        $bookRepository, $libraryRepository, $authorRepository, $databaseTransaction
+    );
 });
 
 it('should be throw an expection if cannot find a book for update', function () {
@@ -18,6 +26,47 @@ it('should be throw an expection if cannot find a book for update', function () 
 
     $this->updateBookUseCase->execute($updateBookInputDTO);
 })->throws(NotFoundException::class, 'Book with id: bookId not found');
+
+it('should be throw an exception if cannot find an library id', function () {
+    $book = BookModel::factory()->create();
+    $updateBookInputDTO = Mockery::mock(UpdateBookInputDTO::class, [
+        $book->id, 'libraryId',
+    ]);
+
+    $this->updateBookUseCase->execute($updateBookInputDTO);
+})->throws(NotFoundException::class, 'Library with id: libraryId not found');
+
+it('should be throw an exception if cannot find an author id', function () {
+    $book = BookModel::factory()->create();
+    $library = LibraryModel::factory()->create();
+    $author = AuthorModel::factory()->create();
+    $updateBookInputDTO = Mockery::mock(UpdateBookInputDTO::class, [
+        $book->id,
+        $library->id,
+        'Book title',
+        205,
+        2000,
+        [$author->id, 'authorId'],
+    ]);
+
+    $this->updateBookUseCase->execute($updateBookInputDTO);
+})->throws(NotFoundException::class, 'Author with id: authorId not found');
+
+it('should be throw an exception if cannot find authors id', function () {
+    $book = BookModel::factory()->create();
+    $library = LibraryModel::factory()->create();
+    $author = AuthorModel::factory()->create();
+    $updateBookInputDTO = Mockery::mock(UpdateBookInputDTO::class, [
+        $book->id,
+        $library->id,
+        'Book title',
+        205,
+        2000,
+        [$author->id, 'authorId1', 'authorId2'],
+    ]);
+
+    $this->updateBookUseCase->execute($updateBookInputDTO);
+})->throws(NotFoundException::class, 'Authors with id: authorId1, authorId2 not found');
 
 test('should be able to update a book', function (
     string $libraryId = '',
@@ -68,6 +117,18 @@ test('should be able to update a book', function (
         'numberOfPages' => null,
         'yearLaunched' => 2022,
     ],
+    'sending an author id' => [
+        'libraryId' => '',
+        'title' => '',
+        'numberOfPages' => null,
+        'yearLaunched' => null,
+    ],
+    'sending more than once author id' => [
+        'libraryId' => '',
+        'title' => '',
+        'numberOfPages' => null,
+        'yearLaunched' => null,
+    ],
     'sending all data' => [
         'libraryId' => fn () => LibraryModel::factory()->create()->id,
         'title' => 'Book title updated',
@@ -75,3 +136,26 @@ test('should be able to update a book', function (
         'yearLaunched' => 2022,
     ],
 ]);
+
+test('should be able to update a book sendind authors id', function () {
+    $expectedBook = BookModel::factory()->create();
+    $author = AuthorModel::factory()->create();
+    $updateBookInputDTO = new UpdateBookInputDTO(
+        id: $expectedBook->id,
+        authorsId: [$author->id]
+    );
+
+    $actualBook = $this->updateBookUseCase->execute($updateBookInputDTO);
+
+    $this->assertDatabaseHas('books_authors', [
+        'book_id' => $expectedBook->id,
+        'author_id' => $author->id,
+    ]);
+    expect($actualBook)->toMatchObject([
+        'id' => $expectedBook->id,
+        'library_id' => $expectedBook->library_id,
+        'title' => $expectedBook->title,
+        'number_of_pages' => $expectedBook->number_of_pages,
+        'year_launched' => $expectedBook->year_launched,
+    ]);
+});
