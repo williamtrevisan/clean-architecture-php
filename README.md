@@ -24,7 +24,7 @@ Clean Architecture - PHP é uma aplicação backend criada para estar desenvolve
     composer install
     
     # Para executar os testes
-    ./vendor/bin/phpunit
+    ./vendor/bin/pest
 ```
 
 ## Tecnologias utilizadas
